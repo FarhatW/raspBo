@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+             xmlns:mvc="http://www.springframework.org/schema/mvc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xmlns:tx="http://www.springframework.org/schema/tx"
+             xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+
+     xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/jpa
+		http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+
+    <context:annotation-config/>
+    <mvc:annotation-driven/>
+    <context:component-scan base-package="org.ril.raspBo"/>
+    <tx:annotation-driven proxy-target-class="true"/>
+
+    <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/"/>
+
+    <bean id="jspViewResolver"
+                class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="messageSource"
+                class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:messages"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager ">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <jpa:repositories base-package="org.ril.raspBo.repository"/>
+
+    <bean id="entityManagerFactory"
+                class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="org.ril.raspBo"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="generateDdl" value="true"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="propertyConfigurer"
+                class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+                p:location="classpath:jdbc.properties"/>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+                p:driverClassName="${jdbc.driverClassName}"
+                p:url="${jdbc.databaseurl}"
+                p:username="${jdbc.username}"
+                p:password="${jdbc.password}"/>
+
+
+    <!--<beans:bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
+        <!--<beans:property name="dataSource" ref="dataSource"/>-->
+        <!--<beans:property name="configLocation">-->
+            <!--<beans:value>classpath:hibernate.cfg.xml</beans:value>-->
+        <!--</beans:property>-->
+        <!--<beans:property name="hibernateProperties">-->
+            <!--<beans:value>-->
+                <!--hibernate.connection.provider_class = org.hibernate.connection.C3P0ConnectionProvider-->
+                <!--hibernate.dialect=org.hibernate.dialect.SQLServer2008Dialect-->
+                <!--hibernate.show_sql=true-->
+            <!--</beans:value>-->
+        <!--</beans:property>-->
+    <!--</beans:bean>-->
+
+    <!--<beans:bean id="sessiontransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">-->
+        <!--<beans:property name="sessionFactory" ref="sessionFactory"/>-->
+    <!--</beans:bean>-->
+
+
+</beans>
