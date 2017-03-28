@@ -13,6 +13,5 @@
 		<mapping class="org.ril.raspBo.model.Country" />
 		<mapping class="org.ril.raspBo.model.Groupe" />
 		<mapping class="org.ril.raspBo.model.Classroom" />
-		<mapping class="org.ril.raspBo.model.ClassroomHasUser" />
     </session-factory>
 </hibernate-configuration>
