@@ -24,8 +24,8 @@ public class Classroom {
     private String addMac;
 
     @ManyToOne
-    @JoinColumn(name = "Site_id")
-    private Site site;
+    @JoinColumn(name = "site_id")
+    private Site site_id;
 
 
     @OneToMany(cascade=CascadeType.PERSIST)
@@ -57,11 +57,11 @@ public class Classroom {
         this.addMac = addMac;
     }
 
-    public Site getSite() {
-        return site;
+    public Site getSite_id() {
+        return site_id;
     }
 
-    public void setSite(Site site) {
-        this.site = site;
+    public void setSite_id(Site site) {
+        this.site_id = site;
     }
 }

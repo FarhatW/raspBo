@@ -14,7 +14,7 @@ public class Groupe {
     private int id;
 
     @Column(name= "name")
-    private String first_name;
+    private String groupeName;
 
     @Column(name= "started_at")
     private String started_at;
@@ -30,12 +30,12 @@ public class Groupe {
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getGroupeName() {
+        return groupeName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setGroupeName(String first_name) {
+        this.groupeName = first_name;
     }
 
     public String getStarted_at() {

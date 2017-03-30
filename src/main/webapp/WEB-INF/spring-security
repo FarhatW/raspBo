@@ -8,7 +8,7 @@
     <beans:import resource="spring-servlet.xml"/>
 
     <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/users**" access="hasRole('admin')"/>
+        <intercept-url pattern="/users**" access="hasAnyRole"/>
         <headers>
             <cache-control />
         </headers>
@@ -37,14 +37,14 @@
             <password-encoder ref="encoder" />
             <jdbc-user-service data-source-ref="dataSource"
                                users-by-username-query=
-                                       "select email,password, enabled from utilisateur where email=?"
+                                       "select email,password, enabled from user where email=?"
                                authorities-by-username-query=
-                                       "select utilisateur.email, groupe.nom
-                                        from utilisateur
-                                        inner join  utilisateur_has_groupe
-                                            On utilisateur.id = utilisateur_has_groupe.Utilisateur_id
+                                       "select user.email, groupe.name
+                                        from user
+                                        inner join  user_has_groupe
+                                            On user.id = user_has_groupe.user_id
                                         inner join groupe
-                                            ON groupe.id=utilisateur_has_groupe.Groupe_id?" />
+                                            ON groupe.id=user_has_groupe.groupe_id=?" />
         </authentication-provider>
     </authentication-manager>
 

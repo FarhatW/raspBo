@@ -1,6 +1,11 @@
 package org.ril.raspBo.controller;
 
+import org.ril.raspBo.model.Classroom;
+import org.ril.raspBo.model.Company;
+import org.ril.raspBo.model.Groupe;
 import org.ril.raspBo.model.User;
+import org.ril.raspBo.service.ServicesCompany;
+import org.ril.raspBo.service.ServicesGroupe;
 import org.ril.raspBo.service.ServicesUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,49 +13,60 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 
 @Controller
 public class UserController {
 
 	@Autowired
 	private ServicesUser serviceUser;
+	@Autowired
+	private ServicesGroupe servicesGroupe;
+	@Autowired
+	private ServicesCompany servicesCompany;
 
 	@RequestMapping(value =  { "/", "/welcome**" }, method = RequestMethod.GET, headers = "Accept=application/json")
-	public ModelAndView defaultPage() {
-//		List<User> listOfUsers = serviceUser.getAll();
-//		model.addAttribute("country", new User());
-//		model.addAttribute("listOfUsers", listOfUsers);
-		ModelAndView model = new ModelAndView();
-		model.addObject("title", "Spring Security Login Form - Database Authentication");
-		model.addObject("message", "This is default page!");
-		model.setViewName("users");
-		return model;
+	public String defaultPage(Model model) {
+
+		List<User> listOfUsers = serviceUser.getAll();
+		model.addAttribute("user", new User());
+		model.addAttribute("listOfUsers", listOfUsers);
+
+		List<Groupe> listOfGroupes = servicesGroupe.getAll();
+		model.addAttribute("listOfGroupes", listOfGroupes);
+
+		List<Company> listOfCompany = servicesCompany.getAll();
+		model.addAttribute("listOfCompany", listOfCompany);
+
+		model.addAttribute("user");
+		return "users";
 	}
 
-	@RequestMapping(value = "/users/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public User getCountryById(@PathVariable int id) {
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public User getUserById(@PathVariable int id) {
 		return serviceUser.getById(id);
 	}
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST, headers = "Accept=application/json")
-	public String addCountry(@ModelAttribute("country") User country) {
-		if(country.getId()==0)
+	public String addUser(@ModelAttribute("user") User user) {
+		if(user.getId()==0)
 		{
-			serviceUser.add(country);
+			serviceUser.add(user);
 		}
 		else
 		{
-			serviceUser.update(country);
+			serviceUser.update(user);
 		}
 
 		return "redirect:/users";
 	}
 
 	@RequestMapping(value = "/updateUser/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public String updateCountry(@PathVariable("id") int id,Model model) {
-		model.addAttribute("country", this.serviceUser.getById(id));
-		model.addAttribute("listOfCountries", this.serviceUser.getAll());
-		return "country";
+	public String updateUser(@PathVariable("id") int id,Model model) {
+		model.addAttribute("user", this.serviceUser.getById(id));
+		model.addAttribute("listOfUsers", this.serviceUser.getAll());
+		return "users";
 	}
 
 	@RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -59,9 +75,6 @@ public class UserController {
 		return "redirect:/User";
 
 	}
-
-
-
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(@RequestParam(value = "error", required = false) String error,

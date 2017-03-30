@@ -22,13 +22,13 @@ public class ServicesGroupe {
 
     @Transactional
     public List<Groupe> getAll() {
-        List<Groupe> countries = new ArrayList<Groupe>();
+        List<Groupe> groupes = new ArrayList<Groupe>();
         Iterable<Groupe> groupeIterable = repository.findAll();
         Iterator<Groupe> groupeIterator = groupeIterable.iterator();
         while (groupeIterator.hasNext()) {
-            countries.add(groupeIterator.next());
+            groupes.add(groupeIterator.next());
         }
-        return countries;
+        return groupes;
     }
 
     @Transactional
