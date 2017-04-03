@@ -1,8 +1,8 @@
 package org.ril.raspBo.controller;
 
-import org.ril.raspBo.model.Classroom;
+import org.ril.raspBo.model.ClassRoom;
 import org.ril.raspBo.model.Site;
-import org.ril.raspBo.service.ServicesClassroom;
+import org.ril.raspBo.service.ServicesClassRoom;
 import org.ril.raspBo.service.ServicesSite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ import java.util.List;
 public class ClassroomController {
 
     @Autowired
-    private ServicesClassroom servicesClassroom;
+    private ServicesClassRoom servicesClassRoom;
 
     @Autowired
     private ServicesSite servicesSite;
@@ -30,44 +30,46 @@ public class ClassroomController {
     @RequestMapping(value = "/classRoom", method = RequestMethod.GET, headers = "Accept=application/json")
     public String getClassRoom(Model model) {
 
-        List<Classroom> listOfClassRoom = servicesClassroom.getAll();
+        List<ClassRoom> listOfClassRoom = servicesClassRoom.getAll();
         List<Site> listOfSites = servicesSite.getAll();
-        model.addAttribute("classRoom", new Classroom());
+        model.addAttribute("clasRoom", new ClassRoom());
         model.addAttribute("listOfClassRoom", listOfClassRoom);
         model.addAttribute("listOfSites", listOfSites);
         return "classRoom";
     }
-
-    @RequestMapping(value = "/classRoom/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-    public Classroom getClassRoomById(@PathVariable int id) {
-        return servicesClassroom.getById(id);
+    @RequestMapping(value = "/class/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public ClassRoom getClassById(@PathVariable int id) {
+        return servicesClassRoom.getById(id);
     }
 
-    @RequestMapping(value = "/addClassRoom", method = RequestMethod.POST, headers = "Accept=application/json")
-    public String addClassRoom(@ModelAttribute("classRoom") Classroom classroom) {
-        if(classroom.getId()==0)
+    @RequestMapping(value = "/addClass", method = RequestMethod.POST, headers = "Accept=application/json")
+    public String addClass(@ModelAttribute("clasRoom") ClassRoom room) {
+        if(room.getId()==0)
         {
-            servicesClassroom.add(classroom);
+            servicesClassRoom.add(room);
+
         }
         else
         {
-            servicesClassroom.update(classroom);
+            servicesClassRoom.update(room);
         }
 
         return "redirect:/classRoom";
     }
 
-    @RequestMapping(value = "/updateClassRoom/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-    public String updateClassRoom(@PathVariable("id") int id,Model model) {
-        model.addAttribute("classRoom", this.servicesClassroom.getById(id));
-        model.addAttribute("listOfClassRoom", this.servicesClassroom.getAll());
+    @RequestMapping(value = "/updateClass/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public String updateClass(@PathVariable("id") int id,Model model) {
+        model.addAttribute("clasRoom", this.servicesClassRoom.getById(id));
+        model.addAttribute("listOfSites", this.servicesSite.getAll());
+        model.addAttribute("listOfClassRoom", this.servicesClassRoom.getAll());
         return "classRoom";
     }
 
-    @RequestMapping(value = "/deleteClassRoom/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-    public String deleteClassRoom(@PathVariable("id") int id) {
-        servicesClassroom.delete(id);
+    @RequestMapping(value = "/deleteClass/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public String deleteClass(@PathVariable("id") int id) {
+        servicesClassRoom.delete(id);
         return "redirect:/classRoom";
 
     }
+
 }

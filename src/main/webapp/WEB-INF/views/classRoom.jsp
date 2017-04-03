@@ -1,14 +1,15 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="<c:url value="../resources/CSS/main.css" />" />
     <link rel="stylesheet" href="<c:url value="../resources/CSS/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="../resources/CSS/simple-sidebar.css" />"/>
-    <title>Classe</title>
+    <title>Salle</title>
 </head>
 <body>
 <div id="wrapper">
@@ -45,7 +46,7 @@
                     </c:if>
                     <div class="col-xs-12 firstblock">
                         <h3>Ajouter une nouvelle salle :</h3>
-                        <form:form method="post" modelAttribute="classRoom" action="${pageContext.request.contextPath}/addClassRoom">
+                        <form:form method="post" modelAttribute="clasRoom" action="${pageContext.request.contextPath}/addClass">
                             <div class="col-xs-4 col-xs-offset-1 indentblock">
                                 <div class="form-group">
                                     <form:hidden path="id" />
@@ -62,7 +63,7 @@
                                     <select name="site_id" class="form-control">
                                         <c:if test="${!empty listOfSites}">
                                             <c:forEach items="${listOfSites}" var="site">
-                                                <option value="${site.id}">${site.name}</option>
+                                                <option value="${site.id}" selected="${clasRoom!= null && site.id == clasRoom.site_id}">${site.name}</option>
                                             </c:forEach>
                                         </c:if>
                                     </select>
@@ -86,13 +87,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${listOfClassRoom}" var="classRoom">
+                                    <c:forEach items="${listOfClassRoom}" var="classR">
                                         <tr>
-                                            <td>${classRoom.id}</td>
-                                            <td>${classRoom.name}</td>
-                                            <td>${classRoom.site_id.name}</td>
-                                            <td><a href="<c:url value='/updateClassRoom/${calssRoom.id}' />" ><img src="../resources/images/edit.png"></a></td>
-                                            <td><a href="<c:url value='/deleteClassRoom/${calssRoom.id}' />" ><img src="../resources/images/delete.png"></a></td>
+                                            <td>${classR.id}</td>
+                                            <td>${classR.name}</td>
+                                            <td>${classR.site_id}</td>
+                                            <td><a href="<c:url value='/updateClass/${classR.id}' />" ><img src="../resources/images/edit.png"></a></td>
+                                            <td><a href="<c:url value='/deleteClass/${classR.id}' />" ><img src="../resources/images/delete.png"></a></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>

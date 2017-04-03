@@ -45,7 +45,7 @@
                     </c:if>
                     <div class="col-xs-12 firstblock">
                         <h3>Ajouter une nouvelle entreprise :</h3>
-                        <form:form method="post" modelAttribute="company" action="${pageContext.request.contextPath}/addCompany">
+                        <form:form method="post" modelAttribute="company" action="${pageContext.request.contextPath}/addClass">
                             <div class="col-xs-4 col-xs-offset-1 indentblock">
                                 <div class="form-group">
                                     <form:hidden path="id" />

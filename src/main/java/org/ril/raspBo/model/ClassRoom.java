@@ -9,9 +9,7 @@ import java.util.List;
  */
 @Entity
 @Table(name= "classroom")
-public class Classroom {
-
-
+public class ClassRoom {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,14 +21,10 @@ public class Classroom {
     @Column(name="addMac")
     private String addMac;
 
-    @ManyToOne
-    @JoinColumn(name = "site_id")
-    private Site site_id;
+    @Column(name="site_id")
+    private String site_id;
 
 
-    @OneToMany(cascade=CascadeType.PERSIST)
-    @JoinTable(name= "classroom_has_user", joinColumns=@JoinColumn(name= "user_id", referencedColumnName="id"))
-    private List<User> userArrayList =  new ArrayList<>();
 
 
     public int getId() {
@@ -57,11 +51,19 @@ public class Classroom {
         this.addMac = addMac;
     }
 
-    public Site getSite_id() {
+    public String getSite_id() {
         return site_id;
     }
 
-    public void setSite_id(Site site) {
-        this.site_id = site;
+    public void setSite_id(String site_id) {
+        this.site_id = site_id;
     }
+
+//    public Site getSite() {
+//        return site;
+//    }
+//
+//    public void setSite(Site site) {
+//        this.site = site;
+//    }
 }

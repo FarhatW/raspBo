@@ -1,6 +1,5 @@
 package org.ril.raspBo.controller;
 
-import org.ril.raspBo.model.Classroom;
 import org.ril.raspBo.model.Company;
 import org.ril.raspBo.model.Groupe;
 import org.ril.raspBo.model.User;
@@ -66,6 +65,13 @@ public class UserController {
 	@RequestMapping(value = "/updateUser/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String updateUser(@PathVariable("id") int id,Model model) {
 		model.addAttribute("user", this.serviceUser.getById(id));
+
+		List<Groupe> listOfGroupes = servicesGroupe.getAll();
+		model.addAttribute("listOfGroupes", listOfGroupes);
+
+		List<Company> listOfCompany = servicesCompany.getAll();
+		model.addAttribute("listOfCompany", listOfCompany);
+
 		model.addAttribute("listOfUsers", this.serviceUser.getAll());
 		return "users";
 	}

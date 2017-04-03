@@ -42,10 +42,10 @@ INSERT INTO `city` (`id`, `name`, `country_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `classroom`
+-- Structure de la table `classRoom`
 --
 
-CREATE TABLE `classroom` (
+CREATE TABLE `classRoom` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
   `site_id` int(11) NOT NULL,
@@ -53,10 +53,10 @@ CREATE TABLE `classroom` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `classroom`
+-- Contenu de la table `classRoom`
 --
 
-INSERT INTO `classroom` (`id`, `name`, `site_id`, `addMac`) VALUES
+INSERT INTO `classRoom` (`id`, `name`, `site_id`, `addMac`) VALUES
 (1, 'ril', 1, NULL);
 
 -- --------------------------------------------------------
@@ -237,9 +237,9 @@ ALTER TABLE `city`
   ADD KEY `fk_Ville_Pays1_idx` (`country_id`);
 
 --
--- Index pour la table `classroom`
+-- Index pour la table `classRoom`
 --
-ALTER TABLE `classroom`
+ALTER TABLE `classRoom`
   ADD PRIMARY KEY (`id`,`site_id`),
   ADD KEY `fk_Salle_Site1_idx` (`site_id`);
 
@@ -317,9 +317,9 @@ ALTER TABLE `user_has_groupe`
 ALTER TABLE `city`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT pour la table `classroom`
+-- AUTO_INCREMENT pour la table `classRoom`
 --
-ALTER TABLE `classroom`
+ALTER TABLE `classRoom`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `company`
@@ -372,18 +372,18 @@ ALTER TABLE `city`
   ADD CONSTRAINT `fk_Ville_Pays1` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`);
 
 --
--- Contraintes pour la table `classroom`
+-- Contraintes pour la table `classRoom`
 --
-ALTER TABLE `classroom`
+ALTER TABLE `classRoom`
   ADD CONSTRAINT `fk_Salle_Site1` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`);
 
 --
 -- Contraintes pour la table `classroom_has_user`
 --
 ALTER TABLE `classroom_has_user`
-  ADD CONSTRAINT `FK_69wesl7raq5gj0rdba2axun7v` FOREIGN KEY (`user_id`) REFERENCES `classroom` (`id`),
+  ADD CONSTRAINT `FK_69wesl7raq5gj0rdba2axun7v` FOREIGN KEY (`user_id`) REFERENCES `classRoom` (`id`),
   ADD CONSTRAINT `FK_fcq7j3edb5qlgpg0c93hch2fl` FOREIGN KEY (`userArrayList_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `fk_Salle_has_Utilisateur_Salle1` FOREIGN KEY (`classroom_id`) REFERENCES `classroom` (`id`),
+  ADD CONSTRAINT `fk_Salle_has_Utilisateur_Salle1` FOREIGN KEY (`classroom_id`) REFERENCES `classRoom` (`id`),
   ADD CONSTRAINT `fk_Salle_has_Utilisateur_Utilisateur1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
