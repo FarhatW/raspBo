@@ -31,13 +31,16 @@ public class User {
 	@Column(name="qrid")
 	private String qr_code_id;
 
-	@OneToMany(cascade=CascadeType.PERSIST)
-	@JoinTable(name= "user_has_company", joinColumns=@JoinColumn(name= "company", referencedColumnName="id"))
-	private List<Company> companyList =  new ArrayList<>();
+	private String company_id;
+	private String groupe_id;
 
 	@OneToMany(cascade=CascadeType.PERSIST)
-	@JoinTable(name= "user_has_groupe", joinColumns=@JoinColumn(name="Groupe_id", referencedColumnName="id"))
-	private List<Groupe> groupeList =  new ArrayList<>();
+	@JoinTable(name= "user_has_company", joinColumns=@JoinColumn(name= "company_id", referencedColumnName="id"))
+	private List<Company> companyId =  new ArrayList<>();
+
+	@OneToMany(cascade=CascadeType.PERSIST)
+	@JoinTable(name= "user_has_groupe", joinColumns=@JoinColumn(name="groupe_id", referencedColumnName="id"))
+	private List<Groupe> groupeId =  new ArrayList<>();
 
 
 	public User() {

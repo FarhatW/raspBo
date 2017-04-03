@@ -53,13 +53,14 @@ public class UserController {
 		if(user.getId()==0)
 		{
 			serviceUser.add(user);
+
 		}
 		else
 		{
 			serviceUser.update(user);
 		}
 
-		return "redirect:/users";
+		return "redirect:/welcome";
 	}
 
 	@RequestMapping(value = "/updateUser/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -72,7 +73,7 @@ public class UserController {
 	@RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String deleteCountry(@PathVariable("id") int id) {
 		serviceUser.delete(id);
-		return "redirect:/User";
+		return "redirect:/welcome";
 
 	}
 

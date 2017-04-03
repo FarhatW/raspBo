@@ -82,10 +82,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-4 col-xs-offset-1">
-                                <div class="form-group">
-                                    <label for="password">Mot de passe :</label>
-                                    <input path="password" size="30" maxlength="30" class="form-control" placeholder="Votre mot de passe" id="password">
-                                </div>
+
                                 <div class="form-group">
                                     <label for="groupe_id">Groupes</label>
                                     <select name="groupe_id" id="groupe_id" class="form-control">
@@ -97,7 +94,7 @@
                                     </select>
                                 </div>
                                 <label for="company_id">Entreprise</label>
-                                <select name="company_id" id="company_id" class="form-control">
+                                <select name="companyList" id="company_id" class="form-control">
                                     <c:if test="${!empty listOfCompany}">
                                         <c:forEach items="${listOfCompany}" var="company">
                                             <option value="${company.id}">${company.name}</option>

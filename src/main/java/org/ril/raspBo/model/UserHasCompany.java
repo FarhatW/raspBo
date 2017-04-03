@@ -1,0 +1,38 @@
+package org.ril.raspBo.model;
+
+import javax.persistence.*;
+
+/**
+ * Created by Gamer on 03/04/2017.
+ */
+@Entity
+@Table(name= "user_has_company")
+public class UserHasCompany {
+
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name= "user_id")
+    private String user_id;
+
+    @Column(name= "company_id")
+    private String company_id;
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(String company_id) {
+        this.company_id = company_id;
+    }
+}
