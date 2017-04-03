@@ -31,9 +31,6 @@ public class User {
 	@Column(name="qrid")
 	private String qr_code_id;
 
-	private String company_id;
-	private String groupe_id;
-
 	@OneToMany(cascade=CascadeType.PERSIST)
 	@JoinTable(name= "user_has_company", joinColumns=@JoinColumn(name= "company_id", referencedColumnName="id"))
 	private List<Company> companyId =  new ArrayList<>();

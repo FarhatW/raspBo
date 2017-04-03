@@ -1,0 +1,419 @@
+-- phpMyAdmin SQL Dump
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
+--
+-- Client :  127.0.0.1
+-- Généré le :  Lun 03 Avril 2017 à 19:57
+-- Version du serveur :  5.7.14
+-- Version de PHP :  5.6.25
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données :  `dbmaster`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `city`
+--
+
+CREATE TABLE `city` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `country_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `city`
+--
+
+INSERT INTO `city` (`id`, `name`, `country_id`) VALUES
+(1, 'bordeaux', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `classroom`
+--
+
+CREATE TABLE `classroom` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `site_id` int(11) NOT NULL,
+  `addMac` varchar(12) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `classroom`
+--
+
+INSERT INTO `classroom` (`id`, `name`, `site_id`, `addMac`) VALUES
+(1, 'ril', 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `classroom_has_user`
+--
+
+CREATE TABLE `classroom_has_user` (
+  `classroom_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `id` varchar(255) NOT NULL,
+  `userArrayList_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `company`
+--
+
+CREATE TABLE `company` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `company`
+--
+
+INSERT INTO `company` (`id`, `name`) VALUES
+(2, 'aze');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `country`
+--
+
+CREATE TABLE `country` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `country`
+--
+
+INSERT INTO `country` (`id`, `name`) VALUES
+(2, 'azefdgf'),
+(3, 'aze');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `groupe`
+--
+
+CREATE TABLE `groupe` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `started_at` date DEFAULT NULL,
+  `end_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `groupe`
+--
+
+INSERT INTO `groupe` (`id`, `name`, `started_at`, `end_at`) VALUES
+(1, 'Ril_15', NULL, NULL),
+(2, 'admin', '2017-03-02', '2020-11-28');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `presence`
+--
+
+CREATE TABLE `presence` (
+  `id` int(11) NOT NULL,
+  `pointing_at` timestamp NULL DEFAULT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `site`
+--
+
+CREATE TABLE `site` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `city_id` int(11) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `CP` varchar(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `site`
+--
+
+INSERT INTO `site` (`id`, `name`, `city_id`, `address`, `CP`) VALUES
+(1, 'cesi bdx', 1, 'azeazeaze', '33800');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `first_name` varchar(45) NOT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `phone` varchar(13) DEFAULT NULL,
+  `qrId` int(11) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `enabled` int(11) DEFAULT NULL,
+  `companyId` varchar(255) DEFAULT NULL,
+  `groupeId` varchar(255) DEFAULT NULL,
+  `company_id` varchar(255) DEFAULT NULL,
+  `groupe_id` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `user`
+--
+
+INSERT INTO `user` (`id`, `last_name`, `first_name`, `email`, `phone`, `qrId`, `password`, `enabled`, `companyId`, `groupeId`, `company_id`, `groupe_id`) VALUES
+(1, 'farhat', 'werfelli123', 'a@a.a', '052413258', NULL, '$2a$10$uj/UgdKnFTEvbbGzN2sfe.CJBIrkiCEjXEFacLhin5jMyDixS940i', 1, NULL, NULL, NULL, NULL),
+(2, 'gsdsdg', 'aze', 'aa@a.a', '21651321351', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_has_company`
+--
+
+CREATE TABLE `user_has_company` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_has_groupe`
+--
+
+CREATE TABLE `user_has_groupe` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `groupe_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `user_has_groupe`
+--
+
+INSERT INTO `user_has_groupe` (`id`, `user_id`, `groupe_id`) VALUES
+(1, 1, 1),
+(2, 1, 2);
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `city`
+--
+ALTER TABLE `city`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_Ville_Pays1_idx` (`country_id`);
+
+--
+-- Index pour la table `classroom`
+--
+ALTER TABLE `classroom`
+  ADD PRIMARY KEY (`id`,`site_id`),
+  ADD KEY `fk_Salle_Site1_idx` (`site_id`);
+
+--
+-- Index pour la table `classroom_has_user`
+--
+ALTER TABLE `classroom_has_user`
+  ADD PRIMARY KEY (`classroom_id`,`user_id`),
+  ADD UNIQUE KEY `UK_fcq7j3edb5qlgpg0c93hch2fl` (`userArrayList_id`),
+  ADD KEY `fk_Salle_has_Utilisateur_Utilisateur1_idx` (`user_id`),
+  ADD KEY `fk_Salle_has_Utilisateur_Salle1_idx` (`classroom_id`);
+
+--
+-- Index pour la table `company`
+--
+ALTER TABLE `company`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `country`
+--
+ALTER TABLE `country`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `groupe`
+--
+ALTER TABLE `groupe`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `presence`
+--
+ALTER TABLE `presence`
+  ADD PRIMARY KEY (`id`,`user_id`),
+  ADD KEY `fk_Presence_Utilisateur1_idx` (`user_id`);
+
+--
+-- Index pour la table `site`
+--
+ALTER TABLE `site`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_Site_Ville1_idx` (`city_id`);
+
+--
+-- Index pour la table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `qrId_UNIQUE` (`qrId`);
+
+--
+-- Index pour la table `user_has_company`
+--
+ALTER TABLE `user_has_company`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_Utilisateur_has_Entreprise_Entreprise1_idx` (`company_id`),
+  ADD KEY `fk_Utilisateur_has_Entreprise_Utilisateur1_idx` (`user_id`);
+
+--
+-- Index pour la table `user_has_groupe`
+--
+ALTER TABLE `user_has_groupe`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_Utilisateur_has_Groupe_Groupe1_idx` (`groupe_id`),
+  ADD KEY `fk_Utilisateur_has_Groupe_Utilisateur1_idx` (`user_id`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `city`
+--
+ALTER TABLE `city`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `classroom`
+--
+ALTER TABLE `classroom`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `company`
+--
+ALTER TABLE `company`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `country`
+--
+ALTER TABLE `country`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `groupe`
+--
+ALTER TABLE `groupe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `presence`
+--
+ALTER TABLE `presence`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `site`
+--
+ALTER TABLE `site`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT pour la table `user_has_company`
+--
+ALTER TABLE `user_has_company`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `user_has_groupe`
+--
+ALTER TABLE `user_has_groupe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `city`
+--
+ALTER TABLE `city`
+  ADD CONSTRAINT `fk_Ville_Pays1` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`);
+
+--
+-- Contraintes pour la table `classroom`
+--
+ALTER TABLE `classroom`
+  ADD CONSTRAINT `fk_Salle_Site1` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`);
+
+--
+-- Contraintes pour la table `classroom_has_user`
+--
+ALTER TABLE `classroom_has_user`
+  ADD CONSTRAINT `FK_69wesl7raq5gj0rdba2axun7v` FOREIGN KEY (`user_id`) REFERENCES `classroom` (`id`),
+  ADD CONSTRAINT `FK_fcq7j3edb5qlgpg0c93hch2fl` FOREIGN KEY (`userArrayList_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `fk_Salle_has_Utilisateur_Salle1` FOREIGN KEY (`classroom_id`) REFERENCES `classroom` (`id`),
+  ADD CONSTRAINT `fk_Salle_has_Utilisateur_Utilisateur1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `presence`
+--
+ALTER TABLE `presence`
+  ADD CONSTRAINT `fk_Presence_Utilisateur1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `site`
+--
+ALTER TABLE `site`
+  ADD CONSTRAINT `fk_Site_Ville1` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`);
+
+--
+-- Contraintes pour la table `user_has_company`
+--
+ALTER TABLE `user_has_company`
+  ADD CONSTRAINT `FK_3tetxijlnnba25gqtxb3eyaiv` FOREIGN KEY (`company_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `fk_Utilisateur_has_company1` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
+  ADD CONSTRAINT `fk_user_has_company` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `user_has_groupe`
+--
+ALTER TABLE `user_has_groupe`
+  ADD CONSTRAINT `FK_i9uq38orbvk4k4dea7e1yy1m9` FOREIGN KEY (`groupe_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `fk_Utilisateur_has_Groupe_Groupe1` FOREIGN KEY (`groupe_id`) REFERENCES `groupe` (`id`),
+  ADD CONSTRAINT `fk_Utilisateur_has_Groupe_Utilisateur1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
