@@ -1,7 +1,46 @@
-/*body {*/
-     /*background: white url("../images/1.jpg") 50% 100% no-repeat;*/
+body {
+    background-color:#d7eaf1 !important;
+ }
 
- /*}*/
+.menu {
+    margin-bottom:5px;
+}
+
+.blockbtn button {
+    margin:0 0 10px 10px;
+}
+
+.blockbtn button a p {
+    color:#fff;
+    margin:5px;
+}
+
+.firstblock {
+    background-color:#fff;
+    border-radius: 5px;
+}
+
+.indentblock {
+    margin-bottom:25px;
+}
+
+.firstblock h3 {
+    margin:30px;
+}
+
+.secondblock {
+    background-color:#fff;
+    border-radius: 5px;
+    margin-top:30px;
+}
+
+.secondblock h3 {
+    margin:30px;
+}
+
+.btnstyle {
+    margin:25px 0;
+}
 
 .background-main{
     background-color: gainsboro;
@@ -41,15 +80,10 @@ control-label{
 }
 table {
     font-family: "Helvetica Neue", Helvetica, sans-serif;
-    width: 50%;
 }
-th {
-    background: SteelBlue;
-    color: white;
-}
+
 td,th{
-    border: 1px solid gray;
-    width: 25%;
     text-align: left;
     padding: 5px 10px;
 }
+
