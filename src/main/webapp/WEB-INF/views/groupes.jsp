@@ -11,7 +11,7 @@
     <title>Groupes</title>
 </head>
 <body>
-<div id="wrapper">
+<div id="wrapper"  class="toggled">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
@@ -23,10 +23,16 @@
                 <a href="/welcome">Utilisateurs</a>
             </li>
             <li>
-                <a href="/classRoom">Gestion des classes</a>
+                <a href="/classRoom">Gestion des salles</a>
             </li>
             <li>
-                <a href="/presence">Presence du jour</a>
+                <a href="/presence">Gestion des presences</a>
+            </li>
+            <li>
+                <a href="/groupes">Gestion des groupe</a>
+            </li>
+            <li>
+                <a href="/company">Gestion des entreprise</a>
             </li>
         </ul>
     </div>
@@ -38,10 +44,10 @@
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">=</a>
                     </div>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
-                        <h2>
-                            user : ${pageContext.request.userPrincipal.name} | <a
+                        <h3 style="float: right;">
+                           ${pageContext.request.userPrincipal.name} | <a
                                 href="javascript:formSubmit()"> Logout</a>
-                        </h2>
+                        </h3>
                     </c:if>
                     <div class="col-xs-12 firstblock">
                         <h3>Ajouter une nouvelle promotion :</h3>

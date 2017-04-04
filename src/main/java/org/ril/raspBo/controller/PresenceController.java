@@ -68,16 +68,4 @@ public class PresenceController {
         }
         return users;
     }
-
-    private List<Presence> presenceList(User user){
-        List<Presence> list =  servicesPresence.getAll();
-        List<Presence> presences =  new ArrayList<>();
-
-            for (Presence _item:list) {
-                if(user.getId() == _item.getUser().getId())
-                    presences.add(_item);
-            }
-
-        return  presences;
-    }
 }

@@ -23,7 +23,7 @@
         document.getElementById("logoutForm").submit();
     }
 </script>
-<div id="wrapper">
+<div id="wrapper" class="toggled">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
@@ -35,10 +35,16 @@
                 <a href="/welcome">Utilisateurs</a>
             </li>
             <li>
-                <a href="/classRoom">Gestion des classes</a>
+                <a href="/classRoom">Gestion des salles</a>
             </li>
             <li>
-                <a href="/presence">Presence du jour</a>
+                <a href="/presence">Gestion des presences</a>
+            </li>
+            <li>
+                <a href="/groupes">Gestion des groupe</a>
+            </li>
+            <li>
+                <a href="/company">Gestion des entreprise</a>
             </li>
         </ul>
     </div>
@@ -50,15 +56,15 @@
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">=</a>
                     </div>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
-                        <h2>
-                            user : ${pageContext.request.userPrincipal.name} | <a
+                        <h3 style="float: right;">
+                             ${pageContext.request.userPrincipal.name} | <a
                                 href="javascript:formSubmit()"> Logout</a>
-                        </h2>
+                        </h3>
                     </c:if>
-                    <div class="col-xs-12 blockbtn">
-                        <button class="btn btn-primary pull-right"><a href="/groupes"><p>Ajouter une nouvelle promotion</p></a></button>
-                        <button class="btn btn-primary pull-right"><a href="/company"><p>Ajouter une nouvelle entreprise</p></a></button>
-                    </div>
+                    <%--<div class="col-xs-12 blockbtn">--%>
+                        <%--<button class="btn btn-primary pull-right"><a href="/groupes"><p>Ajouter une nouvelle promotion</p></a></button>--%>
+                        <%--<button class="btn btn-primary pull-right"><a href="/company"><p>Ajouter une nouvelle entreprise</p></a></button>--%>
+                    <%--</div>--%>
                     <div class="col-xs-12 firstblock">
                         <h3>Ajouter un nouvel utilisateur :</h3>
                         <form:form method="post" modelAttribute="user" action="${pageContext.request.contextPath}/addUser">
@@ -89,6 +95,16 @@
                                         <c:if test="${!empty listOfGroupes}">
                                             <c:forEach items="${listOfGroupes}" var="groupe">
                                                 <option value="${groupe.id}">${groupe.groupeName}</option>
+                                            </c:forEach>
+                                        </c:if>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="classroom_id">Salles</label>
+                                    <select name="classroom_id" id="classroom_id" class="form-control">
+                                        <c:if test="${!empty listOfClassRoom}">
+                                            <c:forEach items="${listOfClassRoom}" var="classRoom">
+                                                <option value="${classRoom.id}">${classRoom.name}</option>
                                             </c:forEach>
                                         </c:if>
                                     </select>

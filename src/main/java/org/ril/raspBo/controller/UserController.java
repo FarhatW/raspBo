@@ -1,8 +1,10 @@
 package org.ril.raspBo.controller;
 
+import org.ril.raspBo.model.ClassRoom;
 import org.ril.raspBo.model.Company;
 import org.ril.raspBo.model.Groupe;
 import org.ril.raspBo.model.User;
+import org.ril.raspBo.service.ServicesClassRoom;
 import org.ril.raspBo.service.ServicesCompany;
 import org.ril.raspBo.service.ServicesGroupe;
 import org.ril.raspBo.service.ServicesUser;
@@ -24,6 +26,8 @@ public class UserController {
 	private ServicesGroupe servicesGroupe;
 	@Autowired
 	private ServicesCompany servicesCompany;
+	@Autowired
+	private ServicesClassRoom servicesClassRoom;
 
 	@RequestMapping(value =  { "/", "/welcome**" }, method = RequestMethod.GET, headers = "Accept=application/json")
 	public String defaultPage(Model model) {
@@ -37,6 +41,10 @@ public class UserController {
 
 		List<Company> listOfCompany = servicesCompany.getAll();
 		model.addAttribute("listOfCompany", listOfCompany);
+
+		List<ClassRoom> listOfClassRoom = servicesClassRoom.getAll();
+		model.addAttribute("listOfClassRoom", listOfClassRoom);
+
 
 		return "users";
 	}
