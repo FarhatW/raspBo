@@ -1,11 +1,6 @@
 package org.ril.raspBo.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /*
  * This is our model class and it corresponds to Country table in database
@@ -22,7 +17,7 @@ public class Country{
 	@Column(name= "name")
 	String countryName;	
 
-	
+
 	public Country() {
 		super();
 	}

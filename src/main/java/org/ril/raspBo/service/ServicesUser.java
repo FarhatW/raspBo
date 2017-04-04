@@ -1,6 +1,7 @@
 package org.ril.raspBo.service;
 
 import org.ril.raspBo.model.User;
+import org.ril.raspBo.model.UserHasGroupe;
 import org.ril.raspBo.repository.RepositoryUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,17 +15,21 @@ import java.util.List;
 public class ServicesUser {
 
     @Autowired
+    private
     RepositoryUser repositoryUser;
+
+//    @Autowired
+//    private ServicesUserhasGroupe servicesUserhasGroupe;
 
     @Transactional
     public List<User> getAll() {
-        List<User> countries = new ArrayList<User>();
+        List<User> users = new ArrayList<User>();
         Iterable<User> countriesIterable = repositoryUser.findAll();
         Iterator<User> countriesIterator = countriesIterable.iterator();
         while (countriesIterator.hasNext()) {
-            countries.add(countriesIterator.next());
+            users.add(countriesIterator.next());
         }
-        return countries;
+        return users;
     }
 
     @Transactional
@@ -36,6 +41,8 @@ public class ServicesUser {
     public User getByEmail(String email) {
         return repositoryUser.getUserByEmail(email);
     }
+
+
 
     @Transactional
     public void add(User object) {
