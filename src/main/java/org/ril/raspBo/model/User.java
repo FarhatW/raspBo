@@ -3,7 +3,7 @@ package org.ril.raspBo.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.ril.raspBo.model.Presence;
 /*
  * This is our model class and it corresponds to Country table in database
  */
@@ -30,6 +30,7 @@ public class User {
 
 	@Column(name="qrid")
 	private String qr_code_id;
+
 
 
 	public User() {

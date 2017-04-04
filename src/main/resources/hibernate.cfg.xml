@@ -13,5 +13,6 @@
 		<mapping class="org.ril.raspBo.model.Country" />
 		<mapping class="org.ril.raspBo.model.Groupe" />
 		<mapping class="org.ril.raspBo.model.ClassRoom" />
+		<mapping class="org.ril.raspBo.model.UserHasGroupe" />
     </session-factory>
 </hibernate-configuration>

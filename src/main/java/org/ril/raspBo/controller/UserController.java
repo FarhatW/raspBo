@@ -38,7 +38,6 @@ public class UserController {
 		List<Company> listOfCompany = servicesCompany.getAll();
 		model.addAttribute("listOfCompany", listOfCompany);
 
-		model.addAttribute("user");
 		return "users";
 	}
 

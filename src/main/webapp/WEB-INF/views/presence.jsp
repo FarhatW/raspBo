@@ -45,7 +45,7 @@
                     </c:if>
                     <div class="col-xs-12 firstblock">
                         <h3>Afficher les présences :</h3>
-                        <form:form method="post" modelAttribute="presence" action="${pageContext.request.contextPath}/affichepresence">
+                        <form:form method="get" modelAttribute="presence" action="${pageContext.request.contextPath}/getPresence">
                         <div class="col-xs-4 col-xs-offset-1 indentblock">
                             <div class="form-group">
                                 <label for="groupe_id">Groupes</label>
@@ -66,7 +66,7 @@
 
                     <div class="col-xs-12 secondblock">
                         <h3>Afficher les utilisateurs : </h3>
-                        <c:if test="${!empty listOfUsers}">
+                        <c:if test="${!empty listOfUser}">
                             <div class="col-xs-10 col-xs-offset-1">
                                 <table class="table table-striped">
                                     <thead>
@@ -77,11 +77,11 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${listOfUsers}" var="user">
+                                    <c:forEach items="${listOfUser}" var="user">
                                         <tr>
                                             <td>${user.id}</td>
-                                            <td>${user.first_name}</td>
-                                            <td>heure pointage</td>
+                                            <td>${user.user.first_name}</td>
+                                            <td>${user.pointing_at}</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
